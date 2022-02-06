@@ -1,8 +1,8 @@
-let app = require("./app");
-let http = require("http");
+const app = require("./app");
+const http = require("http");
 
 const validatePort = (value) => {
-  let port = parseInt(value, 10);
+  const port = parseInt(value, 10);
   if (isNaN(port)) {
     console.log("Invalid Port");
     return val;
@@ -13,7 +13,7 @@ const validatePort = (value) => {
   return false;
 };
 
-let port = validatePort(process.env.PORT || "3000");
+const port = validatePort(process.env.PORT || "3000");
 app.set("port", port);
-let server = http.createServer(app);
+const server = http.createServer(app);
 server.listen(port);
