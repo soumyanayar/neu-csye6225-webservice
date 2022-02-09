@@ -7,7 +7,6 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
 
 /* All the routes */
 app.use("/spring2022-csye6225/app/1.0.0/", routes);
