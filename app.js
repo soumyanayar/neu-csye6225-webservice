@@ -9,12 +9,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-/* GET home page. */
-app.get("/", (req, res) => {
-  console.log("Root route");
-  res.render("index", { title: "Express" });
-});
-
 /* All the routes */
 app.use("/spring2022-csye6225/app/1.0.0/", routes);
 
