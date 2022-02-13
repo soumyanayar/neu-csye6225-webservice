@@ -13,6 +13,14 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     acquire: 30000,
     idle: 10000,
   },
+  define: {
+    scopes: {
+      excludeCreatedAtUpdateAt: {
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      },
+    },
+    timestamps: false,
+  },
 });
 
 const db = {};
