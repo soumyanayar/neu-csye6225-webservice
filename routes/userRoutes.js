@@ -5,7 +5,7 @@ const User = db.User;
 const userRouter = express.Router();
 const uuid = require("uuid");
 const user = require("../models/user");
-const authorizeToken = require("../middleware/Auth");
+const authorizeToken = require("../middleware/auth");
 
 const hashifyPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
