@@ -10,7 +10,7 @@ module.exports = (database) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 
-  app.use("/spring2022-csye6225/app/a02", basicRoutes);
-  app.use("/spring2022-csye6225/app/a02/v1/user", userRoutes);
+  app.use("/healthz", basicRoutes);
+  app.use("/v1/user", userRoutes);
   return app;
 };

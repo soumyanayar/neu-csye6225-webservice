@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/healthz", async (req, res) => {
+router.get("", async (req, res) => {
   try {
-    res.status(200).json({ message: "Ok" });
+    res.status(200).send();
   } catch (e) {
-    res.status(500).json({ error: e });
+    res.status(500).send();
   }
 });
 
