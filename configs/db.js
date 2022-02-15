@@ -1,34 +1,39 @@
-const dbConfig = require("./config");
+const dbConfig = require("./config").MYSQL_CONFIG;
 
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-  host: dbConfig.HOST,
-  dialect: dbConfig.dialect,
-  operatorsAliases: 0,
+const sequelize = new Sequelize(
+  dbConfig.DB_NAME,
+  dbConfig.DB_USERNAME,
+  dbConfig.DB_PASSWORD,
+  {
+    host: dbConfig.DB_HOST,
+    dialect: "mysql",
+    operatorsAliases: 0,
 
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
-  },
-  define: {
-    scopes: {
-      excludeCreatedAtUpdateAt: {
-        attributes: { exclude: ["createdAt", "updatedAt"] },
-      },
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
     },
-    timestamps: false,
-  },
-});
+    define: {
+      scopes: {
+        excludeCreatedAtUpdateAt: {
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+        },
+      },
+      timestamps: false,
+    },
+  }
+);
 
 const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
-db.User = require("../models/user")(sequelize, Sequelize);
+db.models = {};
+db.models.User = require("../models/user")(sequelize, Sequelize);
 
 db.connect = async () => {
   await sequelize.authenticate();

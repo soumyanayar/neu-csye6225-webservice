@@ -1,4 +1,4 @@
-const app = require("./app");
+const createApp = require("./app");
 const http = require("http");
 const db = require("./configs/db");
 
@@ -32,7 +32,9 @@ const handleShutdown = (signal) => {
 };
 
 const port = validatePort(process.env.PORT || "3000");
+const app = createApp(db);
 app.set("port", port);
+
 const server = http.createServer(app);
 
 db.connect().then(() => {

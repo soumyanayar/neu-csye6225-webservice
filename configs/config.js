@@ -1,13 +1,15 @@
+require("dotenv").config();
+
+const { PORT, DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } =
+  process.env;
+
 module.exports = {
-  HOST: "localhost",
-
-  USER: "my_webserver_admin",
-
-  PASSWORD: "ZXd5wGeAAfWgwZ5Y",
-
-  DB: "my_webserver_db",
-
-  dialect: "mysql",
-
-  PORT: 3306,
+  PORT,
+  MYSQL_CONFIG: {
+    DB_HOST,
+    DB_PORT,
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_NAME,
+  },
 };
