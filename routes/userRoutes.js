@@ -79,7 +79,7 @@ module.exports = (db) => {
     let user = req.user;
     if (
       req.body.id ||
-      req.body.username ||
+      (req.body.username && req.body.username !== user.username) ||
       req.body.account_updated ||
       req.body.account_created
     ) {
