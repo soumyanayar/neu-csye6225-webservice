@@ -14,4 +14,17 @@ source "amazon-ebs" "ec2" {
 
 build {
   sources = ["source.amazon-ebs.ec2"]
+
+  provisioner "shell" {
+    environment_vars = [
+      "DB_HOST=localhost",
+      "DB_PORT=3306",
+      "DB_USERNAME=root",
+      "DB_NAME=my_webserver_db",
+      "PORT=3000"
+    ]
+    scripts = [
+      "createdependencies.sh"
+    ]
+  }
 }
