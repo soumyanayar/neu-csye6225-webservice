@@ -14,6 +14,12 @@ const validatePort = (value) => {
   return false;
 };
 
+const onListening = () => {
+  const addr = server.address();
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  console.log("Server is listening at port: " + addr.port);
+};
+
 const handleShutdown = (signal) => {
   console.log("got %s, starting shutdown", signal);
   if (!server.listening) {
@@ -39,6 +45,7 @@ const server = http.createServer(app);
 
 db.connect().then(() => {
   server.listen(port);
+  server.on("listening", onListening);
 });
 
 process.on("SIGINT", handleShutdown);

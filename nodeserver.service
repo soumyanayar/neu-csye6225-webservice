@@ -1,0 +1,16 @@
+[Unit]
+Description=My Web Server
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/node /home/ec2-user/webservice/server.js
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=my-node-server
+User=ec2-user
+EnvironmentFile=/home/ec2-user/webservice/app.env
+
+[Install]
+WantedBy=multi-user.target
