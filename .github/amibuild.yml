@@ -1,0 +1,65 @@
+name: Web Services CI
+on:
+  push:
+    branches: [packer]
+jobs:
+  packer_validate:
+    runs-on: ubuntu-latest
+    name: Validate Packer Template
+    steps:
+      - name: Step 1 - Checkout code from branch
+        uses: actions/checkout@v2
+
+      - name: Step 2 - Packer Init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: aws-ami.pkr.hcl
+
+      - name: Step 3 - Validate Packer
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -var-file=packervariables.json
+          target: aws-ami.pkr.hcl
+  
+  packer_build:
+    needs: packer_validate
+    runs-on: ubuntu-latest
+    name: Build My AMI
+    steps: 
+      - name: Step 1 - Checkout code from branch
+        uses: actions/checkout@v2
+
+      - name: zip all the webService files
+        run: |
+          zip -r webservice.zip ./
+          pwd ./webservice
+      
+      - name: Step 2 - Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Step 3 - Packer Init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: aws-ami.pkr.hcl
+
+      - name: Step 4 - Build Artifacts
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: aws-ami.pkr.hcl
+        env:
+          PACKER_LOG: 1
+  
+
+
+
+
+

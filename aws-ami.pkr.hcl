@@ -34,7 +34,7 @@ build {
       "PORT=3000"
     ]
     scripts = [
-      "packers/createdependencies.sh"
+      "createdependencies.sh"
     ]
   }
 }
