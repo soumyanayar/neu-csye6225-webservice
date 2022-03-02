@@ -36,7 +36,6 @@ build {
     scripts = [
       "mysqlDependencies.sh",
       "nodejsDependencies.sh",
-      "mysqlScript.sh",
       "otherDependencies.sh",
     ]
   }
