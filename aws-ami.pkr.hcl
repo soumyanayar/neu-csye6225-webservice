@@ -12,6 +12,7 @@ source "amazon-ebs" "ec2" {
   }
   //ami_users = "demo_account_id;
   ssh_username                = "ec2-user"
+  ami_users                   = ["906347585273"]
   associate_public_ip_address = true
   region                      = "us-west-2"
   source_ami                  = "ami-0341aeea105412b57"
