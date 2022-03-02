@@ -57,4 +57,4 @@ This assignment solution includes the followings technology and commands:
 
 2. For every `GET` method the user has to provide the username and password as an authentication. The hashed password saved in the db will be then decrypted and `compared` with the `password(Entered by the user)`. If that matches, then login is `successful` otherwise returns an error `unauthorized user`
 
-3. To `Update` any fields in the user information, first the login should be legit. What I mean is, the user details should be present in the db, Later if the user wants change any fields ( `password`, `first_name` and `last _name`  fields only) can be allowed
+3. To `Update` any fields in the user information, first the login should be legit. What I mean is, the user details should be present in the db, Later if the user wants change any fields ( `password`, `first_name` and `last _name`  fields only) can be allowed.
