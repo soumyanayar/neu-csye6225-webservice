@@ -1,4 +1,4 @@
-name: Web Service Continuous Integration
+name: Validate the Packer AMI Template
 on:
   pull_request:
     branches: [main]
