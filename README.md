@@ -58,3 +58,31 @@ This assignment solution includes the followings technology and commands:
 2. For every `GET` method the user has to provide the username and password as an authentication. The hashed password saved in the db will be then decrypted and `compared` with the `password(Entered by the user)`. If that matches, then login is `successful` otherwise returns an error `unauthorized user`
 
 3. To `Update` any fields in the user information, first the login should be legit. What I mean is, the user details should be present in the db, Later if the user wants change any fields ( `password`, `first_name` and `last _name`  fields only) can be allowed.
+
+
+
+## Assignment 4
+#### Work Flow : There are several stages involved in this assignment
+
+### Stage 1 : Packer file to create AMI in the AWS Console
+1. Using the packer file format, aws-ami.pkr.hcl is written, To add show the same AMI in demo account `ami_users` properties also used in source of the file.
+2. We need to install MySQL, node.js, unzip in the Vm we are creating, therefore we need to include the commands to do the same in our packer as well. scripts (.sh) file has all the commands those will install the required applications and packages.
+3. Any special variables can be saved in the `packervariables.json` file
+4. To format the file use `packer fmt .` command.
+5. To validate the packer use ` packer validate . ` 
+6. To run the packer file use `packer build aws-ami.pkr.hcl`
+7. To run thr packer with variable parse the argument `packer build -var-file='/Users/soumyanayar/NEU/Spring 2022/Cloud Computing/webservice/packervariables.json' aws-ami.pkr.hcl`
+
+### Stage 2: Github actions 
+1. To automate the AMI building in the AWS console enable the github actions when pull request merges with main branch
+
+### Stage 3: When the build completes in the github actions
+1. Go to the AWS EC2 console and check for AMI(Private) and copy the `ami-id` 
+
+### Stage 4: CloudFormation
+1. Go to `infrastructure` repo and paste the `ami-id` in the AMI parameter 
+2. And deploy the cloudformation using `aws cloudformation deploy --profile dev --stack-name final1 --region us-west-2 --template-file ./csye6225-infra.yml`
+   
+### Stage 5: Web application
+1. Go the instance that runs with the `stack-name` and copy the `public_ip_address` 
+2. Now got the `postman` app and pass `public_ip_address:3000/healthz` and other end points to check whether the web application is running

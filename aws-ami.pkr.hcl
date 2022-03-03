@@ -10,7 +10,6 @@ source "amazon-ebs" "ec2" {
     volume_size           = 8
     volume_type           = "gp2"
   }
-  //ami_users = "demo_account_id;
   ssh_username                = "ec2-user"
   ami_users                   = ["906347585273"]
   associate_public_ip_address = true
@@ -35,7 +34,7 @@ build {
       "PORT=3000"
     ]
     scripts = [
-      "createdependencies.sh"
+      "rundependencies.sh"
     ]
   }
 }
