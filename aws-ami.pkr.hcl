@@ -34,9 +34,7 @@ build {
       "PORT=3000"
     ]
     scripts = [
-      "mysqlDependencies.sh",
-      "nodejsDependencies.sh",
-      "otherServicesDependencies.sh",
+      "rundependencies.sh"
     ]
   }
 }
