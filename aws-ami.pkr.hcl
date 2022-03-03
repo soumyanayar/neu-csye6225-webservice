@@ -17,6 +17,8 @@ source "amazon-ebs" "ec2" {
   source_ami                  = "ami-0341aeea105412b57"
 }
 
+error
+
 build {
   sources = ["source.amazon-ebs.ec2"]
 
