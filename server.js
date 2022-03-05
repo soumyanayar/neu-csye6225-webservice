@@ -1,6 +1,8 @@
 const createApp = require("./app");
 const http = require("http");
 const db = require("./configs/db");
+const awsConfig = require("./configs/config").AWS_CONFIG;
+const s3Provider = require("./utils/s3provider");
 
 const validatePort = (value) => {
   const port = parseInt(value, 10);
@@ -37,8 +39,15 @@ const handleShutdown = (signal) => {
   });
 };
 
+const s3 = new s3Provider(
+  awsConfig.AWS_ACCESS_KEY,
+  awsConfig.AWS_SECRET_KEY,
+  awsConfig.AWS_REGION,
+  awsConfig.AWS_BUCKET_NAME
+);
+
 const port = validatePort(process.env.PORT || "3000");
-const app = createApp(db);
+const app = createApp(db, s3);
 app.set("port", port);
 
 const server = http.createServer(app);
