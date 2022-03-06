@@ -9,7 +9,7 @@ module.exports = (db, s3) => {
   const util = require("util");
   const unlinkFile = util.promisify(fs.unlink);
   const multer = require("multer");
-  const upload = multer({ dest: "uploads/" });
+  const upload = multer({ dest: __dirname + "/uploads/" });
 
   imageRouter.post(
     "",

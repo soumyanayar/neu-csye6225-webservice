@@ -8,7 +8,8 @@ class S3Provider {
     aws_region,
     aws_s3_bucket_name
   ) {
-    this.s3 = new S3({ aws_region, aws_access_key_id, aws_secret_access_key });
+    // S3 object without parameters
+    this.s3 = new S3();
     this.bucket_name = aws_s3_bucket_name;
   }
 
