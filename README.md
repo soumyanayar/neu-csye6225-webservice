@@ -86,3 +86,5 @@ This assignment solution includes the followings technology and commands:
 ### Stage 5: Web application
 1. Go the instance that runs with the `stack-name` and copy the `public_ip_address` 
 2. Now got the `postman` app and pass `public_ip_address:3000/healthz` and other end points to check whether the web application is running
+
+Sample Change
