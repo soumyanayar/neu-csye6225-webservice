@@ -42,7 +42,7 @@ module.exports = (db, s3) => {
       }
 
       const image = Image.build({
-        id: uuid.v4(),
+        id: req.user.id,
         url: result.Location,
         user_id: req.user.id,
         file_name: file.originalname,
@@ -66,7 +66,7 @@ module.exports = (db, s3) => {
     try {
       const image = await Image.findOne({
         where: {
-          user_id: req.user.id,
+          id: req.user.id,
         },
       });
 
@@ -97,7 +97,7 @@ module.exports = (db, s3) => {
     try {
       const image = await Image.findOne({
         where: {
-          user_id: req.user.id,
+          id: req.user.id,
         },
       });
 
