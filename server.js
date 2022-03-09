@@ -39,12 +39,7 @@ const handleShutdown = (signal) => {
   });
 };
 
-const s3 = new s3Provider(
-  awsConfig.AWS_ACCESS_KEY,
-  awsConfig.AWS_SECRET_KEY,
-  awsConfig.AWS_REGION,
-  awsConfig.AWS_BUCKET_NAME
-);
+const s3 = new s3Provider(awsConfig.AWS_BUCKET_NAME);
 
 const port = validatePort(process.env.PORT || "3000");
 const app = createApp(db, s3);

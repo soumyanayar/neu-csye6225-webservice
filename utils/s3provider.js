@@ -2,12 +2,7 @@ const fs = require("fs");
 const S3 = require("aws-sdk/clients/s3");
 
 class S3Provider {
-  constructor(
-    aws_access_key_id,
-    aws_secret_access_key,
-    aws_region,
-    aws_s3_bucket_name
-  ) {
+  constructor(aws_s3_bucket_name) {
     // S3 object without parameters
     this.s3 = new S3();
     this.bucket_name = aws_s3_bucket_name;

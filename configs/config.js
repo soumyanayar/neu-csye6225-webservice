@@ -7,9 +7,6 @@ const {
   DB_USERNAME,
   DB_PASSWORD,
   DB_NAME,
-  AWS_ACCESS_KEY,
-  AWS_SECRET_KEY,
-  AWS_REGION,
   AWS_BUCKET_NAME,
 } = process.env;
 module.exports = {
@@ -22,9 +19,6 @@ module.exports = {
     DB_NAME,
   },
   AWS_CONFIG: {
-    AWS_ACCESS_KEY,
-    AWS_SECRET_KEY,
-    AWS_REGION,
     AWS_BUCKET_NAME,
   },
 };

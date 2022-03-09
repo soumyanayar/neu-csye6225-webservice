@@ -3,7 +3,7 @@
 sudo yum update
 
 echo "Install MySQL Client"
-sudo yum install mysql
+sudo yum install -y mysql
 
 echo "Install nodejs"
 sudo yum install -y gcc-c++ make
