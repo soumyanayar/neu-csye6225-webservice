@@ -1,8 +1,14 @@
 require("dotenv").config();
 
-const { PORT, DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } =
-  process.env;
-
+const {
+  PORT,
+  DB_HOST,
+  DB_PORT,
+  DB_USERNAME,
+  DB_PASSWORD,
+  DB_NAME,
+  AWS_BUCKET_NAME,
+} = process.env;
 module.exports = {
   PORT,
   MYSQL_CONFIG: {
@@ -11,5 +17,8 @@ module.exports = {
     DB_USERNAME,
     DB_PASSWORD,
     DB_NAME,
+  },
+  AWS_CONFIG: {
+    AWS_BUCKET_NAME,
   },
 };

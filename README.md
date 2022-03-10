@@ -87,4 +87,10 @@ This assignment solution includes the followings technology and commands:
 1. Go the instance that runs with the `stack-name` and copy the `public_ip_address` 
 2. Now got the `postman` app and pass `public_ip_address:3000/healthz` and other end points to check whether the web application is running
 
-Sample Change
+## Assignment 5
+1. New API `POST ` for `/v1/user/self/pic` will let an authenticated user to upload a profile picture 
+2. `GET` for `/v1/user/self/pic` will get the profile picture for the authenticated user
+3. `DELETE` for `/v1/user/self/pic` will delete the profile picture
+4. `$ npm install --save multer` command to install the multer package. This will allow us to do the GET, POST and DELETE operation on image's URL saved in S# bucket of AWS
+5. Removed the locally installed MYSQL, RDS Instance in AWS will be used to save the data from the web application
+6. Used `aws-sdk/clients/s3` to make a call to s3 bucket and the same is installed using `npm install @aws-sdk/client-s3`.

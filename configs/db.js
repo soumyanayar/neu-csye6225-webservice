@@ -34,6 +34,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.models = {};
 db.models.User = require("../models/user")(sequelize, Sequelize);
+db.models.Image = require("../models/image")(sequelize, Sequelize);
 
 db.connect = async () => {
   await sequelize.authenticate();
