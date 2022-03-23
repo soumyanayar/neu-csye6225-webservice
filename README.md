@@ -94,3 +94,6 @@ This assignment solution includes the followings technology and commands:
 4. `$ npm install --save multer` command to install the multer package. This will allow us to do the GET, POST and DELETE operation on image's URL saved in S# bucket of AWS
 5. Removed the locally installed MYSQL, RDS Instance in AWS will be used to save the data from the web application
 6. Used `aws-sdk/clients/s3` to make a call to s3 bucket and the same is installed using `npm install @aws-sdk/client-s3`.
+
+## Assignment 6
+1. Load testing is added to the repo to test the load balancer
