@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "b4ab0dd8-5b40-4b13-9666-b497822e5604",
+		"name": "WebService-Load-Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "healthz home page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{AppURL}}:{{AppPort}}/healthz",
+					"protocol": "http",
+					"host": [
+						"{{AppURL}}"
+					],
+					"port": "{{AppPort}}",
+					"path": [
+						"healthz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{$randomEmail}}\",\n    \"password\": \"hello123\",\n    \"first_name\": \"{{$randomFirstName}}\",\n    \"last_name\": \"{{$randomLastName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{AppURL}}:{{AppPort}}/v1/user",
+					"protocol": "http",
+					"host": [
+						"{{AppURL}}"
+					],
+					"port": "{{AppPort}}",
+					"path": [
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AppURL",
+			"value": "demo.soumyanayar.me",
+			"type": "string"
+		},
+		{
+			"key": "AppPort",
+			"value": "80",
+			"type": "string"
+		}
+	]
+}
