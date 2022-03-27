@@ -78,42 +78,42 @@ jobs:
             dId=$(echo $output | jq -r '.deploymentId')
             aws deploy wait deployment-successful --deployment-id $dId
 
-  packer_init_validate_build:
-    needs: nodejs_tests
-    runs-on: ubuntu-latest
-    name: Build AWS Custom AMI with Node Application artifacts
-    steps: 
-      - name: Step 1 - Checkout code from branch
-        uses: actions/checkout@v2
+  # packer_init_validate_build:
+  #   needs: nodejs_tests
+  #   runs-on: ubuntu-latest
+  #   name: Build AWS Custom AMI with Node Application artifacts
+  #   steps: 
+  #     - name: Step 1 - Checkout code from branch
+  #       uses: actions/checkout@v2
       
-      - name: Step 3 - Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+  #     - name: Step 3 - Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ${{ env.AWS_REGION }}
 
-      - name: Step 4 - Packer Init
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: init
-          target: aws-ami.pkr.hcl
+  #     - name: Step 4 - Packer Init
+  #       uses: hashicorp/packer-github-actions@master
+  #       with:
+  #         command: init
+  #         target: aws-ami.pkr.hcl
 
-      - name: Step 5 - Validate Packer Template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: validate
-          arguments: -syntax-only
-          target: aws-ami.pkr.hcl
+  #     - name: Step 5 - Validate Packer Template
+  #       uses: hashicorp/packer-github-actions@master
+  #       with:
+  #         command: validate
+  #         arguments: -syntax-only
+  #         target: aws-ami.pkr.hcl
 
-      - name: Step 6 - Build Artifacts and create Custom AMI from Packer Build
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-color=false -on-error=abort"
-          target: aws-ami.pkr.hcl
-        env:
-          PACKER_LOG: 1
+  #     - name: Step 6 - Build Artifacts and create Custom AMI from Packer Build
+  #       uses: hashicorp/packer-github-actions@master
+  #       with:
+  #         command: build
+  #         arguments: "-color=false -on-error=abort"
+  #         target: aws-ami.pkr.hcl
+  #       env:
+  #         PACKER_LOG: 1
   
 
 
