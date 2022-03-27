@@ -20,11 +20,6 @@ source "amazon-ebs" "ec2" {
 build {
   sources = ["source.amazon-ebs.ec2"]
 
-  provisioner "file" {
-    source      = "webservice.zip"
-    destination = "~/webservice.zip"
-  }
-
   provisioner "shell" {
     scripts = [
       "rundependencies.sh"
