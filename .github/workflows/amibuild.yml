@@ -1,9 +1,9 @@
 name: Web Service Continuous Integration
 
 env:
-  ARTIFACT_NAME: webservice${{github.event.head_commit.id}}
-  CODEDEPLOY_APPLICATION_NAME: csye6225-webservice
-  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP: csye6225-webservice-deployment-group
+  ARTIFACT_NAME: webservice
+  CODEDEPLOY_APPLICATION_NAME: CodeDeployApp-Test1
+  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP: CodeDeployApp-DeploymentGroup-Test1
   AWS_REGION: us-west-2
 
 on:
