@@ -96,4 +96,4 @@ This assignment solution includes the followings technology and commands:
 6. Used `aws-sdk/clients/s3` to make a call to s3 bucket and the same is installed using `npm install @aws-sdk/client-s3`.
 
 ## Assignment 6
-1. Load testing is added to the repo to test the load balancer...
+1. Load testing is added to the repo to test the load balancer
