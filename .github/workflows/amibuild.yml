@@ -2,8 +2,8 @@ name: Web Service Continuous Integration
 
 env:
   ARTIFACT_NAME: webservice
-  CODEDEPLOY_APPLICATION_NAME: CodeDeployApp-Test1
-  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP: CodeDeployApp-DeploymentGroup-Test1
+  CODEDEPLOY_APPLICATION_NAME: csye6225-webapp
+  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP: csye6225-webapp-deployment
   AWS_REGION: us-west-2
 
 on:
