@@ -16,6 +16,9 @@ echo "Installing unzip"
 sudo yum makecache
 sudo yum install unzip -y
 
+# New changes
+unzip webservice.zip -d ~/webservice
+
 echo "Installing AWS CodeDeploy Agent"
 sudo yum update
 sudo yum install ruby -y
