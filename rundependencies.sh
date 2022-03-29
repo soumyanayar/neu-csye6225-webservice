@@ -16,7 +16,7 @@ echo "Installing unzip"
 sudo yum makecache
 sudo yum install unzip -y
 
-# New changes
+# New changes made
 unzip webservice.zip -d ~/webservice
 
 echo "Installing AWS CodeDeploy Agent"
