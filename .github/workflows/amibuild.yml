@@ -40,19 +40,14 @@ jobs:
       - name: Step 1 - Checkout code from branch
         uses: actions/checkout@v2
       
-      - name: Step 2 - zip all the webService files
-        run: |
-          zip -r webservice.zip ./
-          pwd ./webservice
-      
-      - name: Step 3 - Configure AWS Credentials
+      - name: Step 2 - Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Step 4 - Zip the artifacts
+      - name: Step 3 - Zip the artifacts
         run: |
           mkdir codedeploy_artifacts
           ls -al
@@ -64,7 +59,7 @@ jobs:
           cd ..
           ls -al
       
-      - name: Step 5 - Copy the artifacts to S3
+      - name: Step 4 - Copy the artifacts to S3
         run: |
           aws s3 sync ./codedeploy_artifacts s3://${{ secrets.S3_CODEDEPLOY_BUCKET }}
       
@@ -90,28 +85,33 @@ jobs:
     steps: 
       - name: Step 1 - Checkout code from branch
         uses: actions/checkout@v2
+
+      - name: Step 2 - zip all the webService files
+        run: |
+          zip -r webservice.zip ./
+          pwd ./webservice
       
-      - name: Step 2 - Configure AWS Credentials
+      - name: Step 3 - Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Step 3 - Packer Init
+      - name: Step 4 - Packer Init
         uses: hashicorp/packer-github-actions@master
         with:
           command: init
           target: aws-ami.pkr.hcl
 
-      - name: Step 4 - Validate Packer Template
+      - name: Step 5 - Validate Packer Template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
           arguments: -syntax-only
           target: aws-ami.pkr.hcl
 
-      - name: Step 5 - Build Artifacts and create Custom AMI from Packer Build
+      - name: Step 6 - Build Artifacts and create Custom AMI from Packer Build
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
