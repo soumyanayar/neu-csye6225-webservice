@@ -17,7 +17,8 @@ sudo yum makecache
 sudo yum install unzip -y
 
 # New changes made
-unzip webservice.zip -d ~/webservice
+unzip /home/ec2-user/webservice.zip -d /home/ec2-user/webservice
+sudo rm -rf /home/ec2-user/webservice.zip
 
 echo "Installing AWS CodeDeploy Agent"
 sudo yum update
