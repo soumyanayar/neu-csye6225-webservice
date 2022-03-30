@@ -5,7 +5,7 @@ const request = require("supertest");
 
 //
 test("GET healthz endpoint", async () => {
-  await request(app).get("/health").expect(200);
+  await request(app).get("/healthz").expect(200);
 });
 
 test("GET random not found endpoint", async () => {
