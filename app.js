@@ -11,8 +11,8 @@ module.exports = (database, s3) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 
-  app.use("/health2", basicRoutes);
-  app.use("/v1/user", userRoutes);
-  app.use("/v1/user/self/pic", imageRoutes);
+  app.use("/healthz", basicRoutes);
+  app.use("/v2/user", userRoutes);
+  app.use("/v2/user/self/pic", imageRoutes);
   return app;
 };
