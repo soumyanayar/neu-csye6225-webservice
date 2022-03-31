@@ -16,7 +16,7 @@ test("GET user endpoint happy path", async () => {
   const app = require("../app")(dbMock);
 
   await request(app)
-    .get("/v2/user/self")
+    .get("/v1/user/self")
     .auth("test@test.com", "test12345")
     .expect(200)
     .then((response) => {
@@ -54,7 +54,7 @@ test("GET user endpoint wrong password or empty auth header", async () => {
   const app = require("../app")(dbMock);
 
   await request(app)
-    .get("/v2/user/self")
+    .get("/v1/user/self")
     .auth("test@test.com", "wrongpassword")
     .expect(401)
     .then((response) => {
@@ -65,7 +65,7 @@ test("GET user endpoint wrong password or empty auth header", async () => {
     });
 
   await request(app)
-    .get("/v2/user/self")
+    .get("/v1/user/self")
     .expect(401)
     .then((response) => {
       // Verify the response username
@@ -88,7 +88,7 @@ test("POST (Create) user endpoint Happy Path", async () => {
   const app = require("../app")(dbMock);
 
   await request(app)
-    .post("/v2/user")
+    .post("/v1/user")
     .send({
       username: "Leo.Schneider38@gmail.com",
       password: "test12345",
@@ -129,7 +129,7 @@ test("POST (Create) user endpoint request body without username", async () => {
   const app = require("../app")(dbMock);
 
   await request(app)
-    .post("/v2/user")
+    .post("/v1/user")
     .send({
       password: "test12345",
       first_name: "Deshaun",
@@ -165,7 +165,7 @@ test("PUT (Update) user endpoint request with changed first name and last name",
   const app = require("../app")(dbMock);
 
   await request(app)
-    .put("/v2/user/self")
+    .put("/v1/user/self")
     .auth("test@test.com", "test12345")
     .send({
       first_name: "Deshaun",
@@ -190,7 +190,7 @@ test("PUT (Update) user endpoint request with bad request scenarios", async () =
   const app = require("../app")(dbMock);
 
   await request(app)
-    .put("/v2/user/self")
+    .put("/v1/user/self")
     .auth("test@test.com", "test12345")
     .send({
       username: "test@gmail.com",
@@ -211,7 +211,7 @@ test("PUT (Update) user endpoint request with bad request scenarios", async () =
 
   // Testing the scenario where request body is empty
   await request(app)
-    .put("/v2/user/self")
+    .put("/v1/user/self")
     .auth("test@test.com", "test12345")
     .send({})
     .set("Accept", "application/json")
