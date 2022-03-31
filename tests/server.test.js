@@ -11,3 +11,4 @@ test("GET healthz endpoint", async () => {
 test("GET random not found endpoint", async () => {
   await request(app).get("/randomendpoint").expect(404);
 });
+
