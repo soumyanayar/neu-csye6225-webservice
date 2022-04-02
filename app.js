@@ -1,13 +1,18 @@
-module.exports = (database, s3) => {
+module.exports = (database, s3, logger, sdc) => {
   const express = require("express");
   const path = require("path");
-  const logger = require("morgan");
-  const basicRoutes = require("./routes");
-  const userRoutes = require("./routes/userRoutes")(database);
-  const imageRoutes = require("./routes/imageRoutes")(database, s3);
+  const morganLogger = require("morgan");
+  const basicRoutes = require("./routes")(logger, sdc);
+  const userRoutes = require("./routes/userRoutes")(database, logger, sdc);
+  const imageRoutes = require("./routes/imageRoutes")(
+    database,
+    s3,
+    logger,
+    sdc
+  );
   const app = express();
 
-  app.use(logger("dev"));
+  app.use(morganLogger("dev"));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 

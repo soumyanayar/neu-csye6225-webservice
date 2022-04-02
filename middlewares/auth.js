@@ -1,4 +1,4 @@
-module.exports = (User) => {
+module.exports = (User, logger) => {
   const {
     getUserPasswordAuth,
     comparePassword,

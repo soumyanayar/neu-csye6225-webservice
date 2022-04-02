@@ -1,9 +1,9 @@
-module.exports = (db) => {
+module.exports = (db, logger, sdc) => {
   const express = require("express");
   const userRouter = express.Router();
   const uuid = require("uuid");
   const User = db.models.User;
-  const authorizeToken = require("../middlewares/auth")(User);
+  const authorizeToken = require("../middlewares/auth")(User, logger);
   const { hashifyPassword } = require("../utils/authHelpers");
 
   // remove the password from the user object
@@ -16,6 +16,7 @@ module.exports = (db) => {
 
   // POST /v1/user : create a new user and store in the db
   userRouter.post("/", async (req, res) => {
+    sdc.increment("user.post");
     // validation for the user object id, account_created, account_updated fields should not be sent in the request body
     if (req.body.id || req.body.account_created || req.body.account_updated) {
       return res.status(400).json({
@@ -68,6 +69,7 @@ module.exports = (db) => {
 
   userRouter.get("/self", authorizeToken, async (req, res) => {
     try {
+      sdc.increment("user.get");
       let formattedUser = formatUser(req.user.dataValues);
       return res.status(200).json(formattedUser);
     } catch (err) {
@@ -76,6 +78,7 @@ module.exports = (db) => {
   });
 
   userRouter.put("/self", authorizeToken, async (req, res) => {
+    sdc.increment("user.put");
     let user = req.user;
     if (
       req.body.id ||

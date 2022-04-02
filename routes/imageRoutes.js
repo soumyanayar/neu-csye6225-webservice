@@ -1,10 +1,10 @@
-module.exports = (db, s3) => {
+module.exports = (db, s3, logger, sdc) => {
   const express = require("express");
   const imageRouter = express.Router();
   const uuid = require("uuid");
   const User = db.models.User;
   const Image = db.models.Image;
-  const authorizeToken = require("../middlewares/auth")(User);
+  const authorizeToken = require("../middlewares/auth")(User, logger);
   const fs = require("fs");
   const util = require("util");
   const unlinkFile = util.promisify(fs.unlink);
@@ -16,6 +16,9 @@ module.exports = (db, s3) => {
     authorizeToken,
     upload.single("profilePic"),
     async (req, res) => {
+      sdc.increment("profilepic.post");
+      logger.info(`POST /image - "req.file":` + req.file);
+
       const file = req.file;
 
       // validate file type
@@ -64,6 +67,7 @@ module.exports = (db, s3) => {
 
   imageRouter.get("", authorizeToken, async (req, res) => {
     try {
+      sdc.increment("profilepic.get");
       const image = await Image.findOne({
         where: {
           user_id: req.user.id,
@@ -95,6 +99,7 @@ module.exports = (db, s3) => {
 
   imageRouter.delete("", authorizeToken, async (req, res) => {
     try {
+      sdc.increment("profilepic.delete");
       const image = await Image.findOne({
         where: {
           user_id: req.user.id,

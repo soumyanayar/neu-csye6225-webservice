@@ -1,5 +1,8 @@
 const createApp = require("./app");
 const http = require("http");
+const logger = require("./configs/winston");
+var SDC = require("statsd-client");
+const sdc = new SDC({ host: "localhost", port: 8125 });
 const db = require("./configs/db");
 const awsConfig = require("./configs/config").AWS_CONFIG;
 const s3Provider = require("./utils/s3provider");
@@ -42,7 +45,7 @@ const handleShutdown = (signal) => {
 const s3 = new s3Provider(awsConfig.AWS_BUCKET_NAME);
 
 const port = validatePort(process.env.PORT || "3000");
-const app = createApp(db, s3);
+const app = createApp(db, s3, logger, sdc);
 app.set("port", port);
 
 const server = http.createServer(app);
