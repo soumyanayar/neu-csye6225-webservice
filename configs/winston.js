@@ -17,7 +17,6 @@ const logger = winston.createLogger({
     new WinstonAwsCloudwatch({
       logGroupName: "csye6225",
       logStreamName: "webservice",
-      awsRegion: "us-west-2",
       createLogGroup: true,
       createLogStream: true,
       logRetention: 7,
@@ -25,6 +24,7 @@ const logger = winston.createLogger({
       submissionInterval: 200,
       submissionRetryCount: 1,
       batchSize: 5,
+      region: "us-west-2",
       formatLog: (item) =>
         `${item.timestamp} ${item.level}: ${item.message} ${JSON.stringify(
           item.meta
