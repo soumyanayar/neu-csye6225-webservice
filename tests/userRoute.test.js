@@ -1,5 +1,20 @@
 const SequelizeMock = require("sequelize-mock");
 const request = require("supertest");
+// mock the statsd client
+const statsdMock = {
+  increment: () => {},
+};
+
+// mock the winston logger
+const loggerMock = {
+  info: () => {},
+  error: () => {},
+};
+
+// mock the s3 provider
+const s3ProviderMock = {
+  upload: () => {},
+};
 
 test("GET user endpoint happy path", async () => {
   const dbMock = new SequelizeMock();
@@ -13,7 +28,7 @@ test("GET user endpoint happy path", async () => {
     id: `d145283a-2990-44b8-969a-76e1a0327305`,
   });
 
-  const app = require("../app")(dbMock);
+  const app = require("../app")(dbMock, s3ProviderMock, loggerMock, statsdMock);
 
   await request(app)
     .get("/v1/user/self")
@@ -51,7 +66,7 @@ test("GET user endpoint wrong password or empty auth header", async () => {
     id: `d145283a-2990-44b8-969a-76e1a0327305`,
   });
 
-  const app = require("../app")(dbMock);
+  const app = require("../app")(dbMock, s3ProviderMock, loggerMock, statsdMock);
 
   await request(app)
     .get("/v1/user/self")
@@ -85,7 +100,7 @@ test("POST (Create) user endpoint Happy Path", async () => {
     id: `d145283a-2990-44b8-969a-76e1a0327305`,
   });
 
-  const app = require("../app")(dbMock);
+  const app = require("../app")(dbMock, s3ProviderMock, loggerMock, statsdMock);
 
   await request(app)
     .post("/v1/user")
@@ -126,7 +141,7 @@ test("POST (Create) user endpoint request body without username", async () => {
     id: `d145283a-2990-44b8-969a-76e1a0327305`,
   });
 
-  const app = require("../app")(dbMock);
+  const app = require("../app")(dbMock, s3ProviderMock, loggerMock, statsdMock);
 
   await request(app)
     .post("/v1/user")
@@ -162,7 +177,7 @@ test("PUT (Update) user endpoint request with changed first name and last name",
     id: `d145283a-2990-44b8-969a-76e1a0327305`,
   });
 
-  const app = require("../app")(dbMock);
+  const app = require("../app")(dbMock, s3ProviderMock, loggerMock, statsdMock);
 
   await request(app)
     .put("/v1/user/self")
@@ -187,7 +202,7 @@ test("PUT (Update) user endpoint request with bad request scenarios", async () =
     id: `d145283a-2990-44b8-969a-76e1a0327305`,
   });
 
-  const app = require("../app")(dbMock);
+  const app = require("../app")(dbMock, s3ProviderMock, loggerMock, statsdMock);
 
   await request(app)
     .put("/v1/user/self")
