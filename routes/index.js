@@ -8,6 +8,7 @@ module.exports = (logger, sdc) => {
       logger.info("GET /healthz - OK");
       res.status(200).send();
     } catch (e) {
+      logger.error(e);
       res.status(500).send();
     }
   });
