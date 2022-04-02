@@ -24,7 +24,9 @@ const logger = winston.createLogger({
       submissionInterval: 200,
       submissionRetryCount: 1,
       batchSize: 5,
-      region: "us-west-2",
+      awsConfig: {
+        region: "us-west-2",
+      },
       formatLog: (item) =>
         `${item.timestamp} ${item.level}: ${item.message} ${JSON.stringify(
           item.meta
