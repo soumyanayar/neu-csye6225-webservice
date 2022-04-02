@@ -27,8 +27,7 @@ const logger = winston.createLogger({
       awsConfig: {
         region: "us-west-2",
       },
-      formatLog: (item) =>
-        `${item.level}: ${item.message} ${JSON.stringify(item.meta)}`,
+      formatLog: (item) => `${item.level}: ${item.message}`,
     }),
   ],
   exitOnError: false,
