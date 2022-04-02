@@ -13,10 +13,7 @@ var options = {
 
 const logger = winston.createLogger({
   transports: [
-    new winston.transports.Console(options.console)({
-      timestamp: true,
-      colorize: true,
-    }),
+    new winston.transports.Console(options.console),
     new WinstonAwsCloudwatch({
       logGroupName: "csye6225",
       logStreamName: "webservice",
@@ -31,9 +28,7 @@ const logger = winston.createLogger({
         region: "us-west-2",
       },
       formatLog: (item) =>
-        `${item.timestamp} ${item.level}: ${item.message} ${JSON.stringify(
-          item.meta
-        )}`,
+        `${item.level}: ${item.message} ${JSON.stringify(item.meta)}`,
     }),
   ],
   exitOnError: false,
