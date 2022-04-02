@@ -21,10 +21,3 @@ fi
 
 cd /home/ec2-user
 sudo rm -rf webservice
-
-# install aws clodwatch agent
-echo "Installing aws cloudwatch agent"
-sudo yum install -y aws-cfn-bootstrap
-sudo yum install -y amazon-cloudwatch-agent
-sudo yum install -y python-pip
-sudo pip install awscli
