@@ -42,15 +42,19 @@ const handleShutdown = (signal) => {
   });
 };
 
+logger.info("Creating s3 provider");
 const s3 = new s3Provider(awsConfig.AWS_BUCKET_NAME);
 
 const port = validatePort(process.env.PORT || "3000");
+logger.info("Creating express app via createApp");
 const app = createApp(db, s3, logger, sdc);
 app.set("port", port);
 
 const server = http.createServer(app);
 
 db.connect().then(() => {
+  logger.info("Connected to database");
+  logger.info("Starting server at port: " + port);
   server.listen(port);
   server.on("listening", onListening);
 });
