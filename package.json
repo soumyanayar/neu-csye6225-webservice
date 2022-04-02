@@ -22,7 +22,10 @@
     "mysql2": "^2.3.3",
     "sequelize": "^6.16.1",
     "sequelize-mock": "^0.10.2",
-    "uuid": "^8.3.2"
+    "statsd-client": "^0.4.7",
+    "uuid": "^8.3.2",
+    "winston": "^3.6.0",
+    "winston-aws-cloudwatch": "^3.0.0"
   },
   "devDependencies": {
     "jest": "^27.5.1",
