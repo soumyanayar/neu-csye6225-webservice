@@ -15,7 +15,7 @@ module.exports = (User, logger) => {
     logger.info("Checking authorization header for the user");
     let { username, password } = getUserPasswordAuth(authHeader);
     logger.info(
-      "Checking username and password for user " + username + "in db....."
+      "Checking username and password for user " + username + " in db....."
     );
     let user = await User.findOne({
       where: {
