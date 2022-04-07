@@ -8,7 +8,7 @@ env:
 
 on:
   push:
-    branches: [main]
+    branches: [main, Assignment-08]
 jobs:
   nodejs_tests:
     runs-on: ubuntu-latest
@@ -77,7 +77,6 @@ jobs:
             echo $output
             dId=$(echo $output | jq -r '.deploymentId')
             aws deploy wait deployment-successful --deployment-id $dId
-
 
   packer_init_validate_build:
     needs: nodejs_tests

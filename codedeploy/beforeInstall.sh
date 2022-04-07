@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# echo "Stopping the cloudwatch agent"
+# sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a stop || true
+
 echo "If nodeserver is running, stop it"
 sudo systemctl status nodeserver.service
 if [ $? -eq 0 ]; then
