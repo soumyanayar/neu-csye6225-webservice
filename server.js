@@ -6,6 +6,8 @@ const sdc = new SDC({ host: "localhost", port: 8125 });
 const db = require("./configs/db");
 const awsConfig = require("./configs/config").AWS_CONFIG;
 const s3Provider = require("./utils/s3provider");
+const dynamoDbProvider = require("./utils/dynamoDbProvider");
+const awsSnsProvider = require("./utils/snsProvider");
 
 const validatePort = (value) => {
   const port = parseInt(value, 10);
@@ -44,10 +46,20 @@ const handleShutdown = (signal) => {
 
 logger.info("Creating s3 provider");
 const s3 = new s3Provider(awsConfig.AWS_BUCKET_NAME);
+logger.info("Creating dynamoDb provider");
+const dynamoDb = new dynamoDbProvider(
+  awsConfig.DYNAMO_DB_END_POINT,
+  awsConfig.DYNAMO_DB_PORT,
+  awsConfig.DYNAMO_DB_TABLE_NAME,
+  "us-west-2"
+);
+
+logger.info("Creating AWS SNS provider");
+const sns = new awsSnsProvider(awsConfig.SNS_TOPIC_ARN, "us-west-2", logger);
 
 const port = validatePort(process.env.PORT || "3000");
 logger.info("Creating express app via createApp");
-const app = createApp(db, s3, logger, sdc);
+const app = createApp(db, s3, logger, sdc, dynamoDb, sns);
 app.set("port", port);
 
 const server = http.createServer(app);

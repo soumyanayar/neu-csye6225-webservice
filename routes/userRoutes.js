@@ -1,4 +1,4 @@
-module.exports = (db, logger, sdc) => {
+module.exports = (db, logger, sdc, dynamoDb, sns) => {
   const express = require("express");
   const userRouter = express.Router();
   const uuid = require("uuid");
@@ -54,6 +54,21 @@ module.exports = (db, logger, sdc) => {
     });
 
     try {
+      // Add user access token to dynamo db
+      logger.info("Adding user " + req.body.username + " to dynamo db");
+      const userToken = dynamoDb.addUserToken(user.username);
+
+      // Send a message to Amazon SNS
+      logger.info("Sending message to Amazon SNS");
+      const message = {
+        username: user.username,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        userToken: userToken,
+        message_type: "verify_user",
+      };
+      await sns.publishMessage(message);
+
       // store the user in the db and return the user
       logger.info("Storing user " + req.body.username + " in db");
       let result = await user.save();

@@ -35,6 +35,15 @@ module.exports = (User, logger) => {
         message: "Unauthorized: Invalid username or password",
       });
     }
+
+    // Check if the user is verified
+    if (!user.verified) {
+      logger.info("User " + username + " is not verified");
+      return res.status(401).json({
+        message: "Unauthorized: User is not verified",
+      });
+    }
+
     logger.info("User " + username + " authorized");
     logger.info("Setting user " + username + " in req");
     req.user = user;

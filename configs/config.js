@@ -20,5 +20,9 @@ module.exports = {
   },
   AWS_CONFIG: {
     AWS_BUCKET_NAME,
+    DYNAMO_DB_TABLE_NAME,
+    DYNAMO_DB_END_POINT,
+    DYNAMO_DB_PORT,
+    SNS_TOPIC_ARN,
   },
 };

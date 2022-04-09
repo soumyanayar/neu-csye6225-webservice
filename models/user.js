@@ -67,6 +67,21 @@ module.exports = (sequelize, Sequelize) => {
         isDate: true,
       },
     },
+
+    verified: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
+
+    verified_on: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
   });
 
   return User;
