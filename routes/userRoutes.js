@@ -67,7 +67,7 @@ module.exports = (db, logger, sdc, dynamoDb, sns) => {
         userToken: userToken,
         message_type: "verify_user",
       };
-      await sns.publishMessage(message);
+      await sns.publishMessage(JSON.stringify(message));
 
       // store the user in the db and return the user
       logger.info("Storing user " + req.body.username + " in db");

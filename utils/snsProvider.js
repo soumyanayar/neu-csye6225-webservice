@@ -13,7 +13,7 @@ class SnsProvider {
   async publishMessage(message) {
     const params = {
       Message: message,
-      TopicArn: this.TopicArn,
+      TopicArn: this.topicArn,
     };
 
     try {
@@ -26,3 +26,5 @@ class SnsProvider {
     }
   }
 }
+
+module.exports = SnsProvider;

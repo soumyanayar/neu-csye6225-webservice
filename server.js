@@ -48,10 +48,8 @@ logger.info("Creating s3 provider");
 const s3 = new s3Provider(awsConfig.AWS_BUCKET_NAME);
 logger.info("Creating dynamoDb provider");
 const dynamoDb = new dynamoDbProvider(
-  awsConfig.DYNAMO_DB_END_POINT,
-  awsConfig.DYNAMO_DB_PORT,
-  awsConfig.DYNAMO_DB_TABLE_NAME,
-  "us-west-2"
+  "us-west-2",
+  awsConfig.DYNAMO_DB_TABLE_NAME
 );
 
 logger.info("Creating AWS SNS provider");

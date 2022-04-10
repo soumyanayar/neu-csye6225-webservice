@@ -2,38 +2,31 @@ const AWS = require("aws-sdk");
 const uuid = require("uuid");
 
 class DynamoDbProvider {
-  constructor(
-    dynamoDbEndpoint,
-    dynamoDbPort,
-    dynamoDbRegion,
-    dynamoDbTableName
-  ) {
-    this.dynamoDbEndpoint = dynamoDbEndpoint;
-    this.dynamoDbPort = dynamoDbPort;
+  constructor(dynamoDbRegion, dynamoDbTableName) {
     this.dynamoDbRegion = dynamoDbRegion;
     this.dynamoDbTableName = dynamoDbTableName;
-    this.dynamoDb = new AWS.DynamoDB({
-      endpoint: this.dynamoDbEndpoint,
-      port: this.dynamoDbPort,
-      region: this.dynamoDbRegion,
-    });
-
-    // dynamo db create table if not exists
+    this.dynamoDb = new AWS.DynamoDB({ region: this.dynamoDbRegion });
   }
 
-  // TODO: Set the TTL for this token to be 5 minutes
-  async addUserToken(username) {
+  async addUserToken(userName) {
     // create user token
     let userToken = uuid.v4();
     // add user token to dynamo db
+
+    // find epoch time of 30 seconds from now
+    let epochTime = new Date().getTime() / 1000 + 30;
+
     let params = {
       TableName: this.dynamoDbTableName,
       Item: {
         username: {
-          S: username,
+          S: userName,
         },
-        userToken: {
+        usertoken: {
           S: userToken,
+        },
+        tokenttl: {
+          N: epochTime.toString(),
         },
       },
     };
@@ -41,23 +34,26 @@ class DynamoDbProvider {
     return userToken;
   }
 
-  async verifyUserToken(username, userToken) {
+  async verifyUserToken(userName, userToken) {
     // get user token from dynamo db
+    // exclude expired tokens
     let params = {
       TableName: this.dynamoDbTableName,
       Key: {
         username: {
-          S: username,
+          S: userName,
         },
       },
     };
+
     let data = await this.dynamoDb.getItem(params).promise();
-    if (
-      data.Item &&
-      data.Item.userToken &&
-      data.Item.userToken.S === userToken
-    ) {
-      return true;
+    if (data.Item && data.Item.usertoken && data.Item.tokenttl) {
+      let userTokenFromDb = data.Item.usertoken.S;
+      let tokenTTL = data.Item.tokenttl.N;
+      let currentTime = new Date().getTime() / 1000;
+      if (userTokenFromDb === userToken && currentTime < tokenTTL) {
+        return true;
+      }
     }
     return false;
   }
