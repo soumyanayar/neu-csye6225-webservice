@@ -37,6 +37,8 @@ class DynamoDbProvider {
   async verifyUserToken(userName, userToken) {
     // get user token from dynamo db
     // exclude expired tokens
+    console.log(userName, userToken);
+
     let params = {
       TableName: this.dynamoDbTableName,
       Key: {

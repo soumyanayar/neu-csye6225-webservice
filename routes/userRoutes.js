@@ -56,7 +56,7 @@ module.exports = (db, logger, sdc, dynamoDb, sns) => {
     try {
       // Add user access token to dynamo db
       logger.info("Adding user " + req.body.username + " to dynamo db");
-      const userToken = dynamoDb.addUserToken(user.username);
+      const userToken = await dynamoDb.addUserToken(user.username);
 
       // Send a message to Amazon SNS
       logger.info("Sending message to Amazon SNS");

@@ -4,6 +4,7 @@ class SnsProvider {
   constructor(topicArn, region, logger) {
     this.topicArn = topicArn;
     this.logger = logger;
+    this.region = region;
     AWS.config.update({ region: region });
     this.sns = new AWS.SNS({
       region: this.region,

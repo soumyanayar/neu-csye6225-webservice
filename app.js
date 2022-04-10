@@ -54,10 +54,11 @@ module.exports = (database, s3, logger, sdc, dynamoDb, sns) => {
       logger.info("Email and token are valid");
       logger.info("Updating user details in MySQL database");
       const user = await database.models.User.findOne({
-        where: { email: email },
+        where: { username: email },
       });
       user.verified = true;
       user.verified_on = new Date();
+      user.account_updated = new Date();
       try {
         await user.save();
       } catch (err) {
