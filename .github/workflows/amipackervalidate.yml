@@ -1,7 +1,7 @@
 name: Validate the Packer AMI Template
 on:
   pull_request:
-    branches: [main]
+    branches: [main, Assignment-09]
 jobs:      
   packer_init_validate:
     runs-on: ubuntu-latest
