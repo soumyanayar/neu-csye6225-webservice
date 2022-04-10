@@ -24,17 +24,22 @@ module.exports = (database, s3, logger, sdc, dynamoDb, sns) => {
 
   logger.info("Configuring morgan logger middleware");
   app.use(morganLogger("dev"));
+
   logger.info("Configuring express.json middleware");
   app.use(express.json());
+
   logger.info("Configuring express.urlencoded middleware");
   app.use(express.urlencoded({ extended: false }));
 
   logger.info("Configuring basic routes");
   app.use("/healthz", basicRoutes);
+
   logger.info("Configuring user routes");
   app.use("/v1/user", userRoutes);
+
   logger.info("Configuring image routes");
   app.use("/v1/user/self/pic", imageRoutes);
+
   logger.info("Configuring route for verifying user email");
   app.use("/v1/verifyUserEmail", async (req, res) => {
     logger.info("Verifying user email");
