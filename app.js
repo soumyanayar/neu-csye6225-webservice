@@ -72,6 +72,11 @@ module.exports = (database, s3, logger, sdc, dynamoDb, sns) => {
       res.status(200).json({
         message: "Email verified successfully",
       });
+    } else {
+      logger.info("Email or token is invalid");
+      res.status(400).json({
+        message: "Email or token is invalid",
+      });
     }
   });
 

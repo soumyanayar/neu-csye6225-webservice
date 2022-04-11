@@ -13,8 +13,8 @@ class DynamoDbProvider {
     let userToken = uuid.v4();
     // add user token to dynamo db
 
-    // find epoch time of 30 seconds from now
-    let epochTime = new Date().getTime() / 1000 + 30;
+    // find epoch time of 300 seconds from now
+    let epochTime = new Date().getTime() / 1000 + 300;
 
     let params = {
       TableName: this.dynamoDbTableName,
@@ -37,8 +37,6 @@ class DynamoDbProvider {
   async verifyUserToken(userName, userToken) {
     // get user token from dynamo db
     // exclude expired tokens
-    console.log(userName, userToken);
-
     let params = {
       TableName: this.dynamoDbTableName,
       Key: {
