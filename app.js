@@ -26,7 +26,7 @@ module.exports = (database, s3, logger, sdc) => {
   logger.info("Configuring basic routes");
   app.use("/healthz", basicRoutes);
   logger.info("Configuring user routes");
-  app.use("/v1/user", userRoutes);
+  app.use("/v3/user", userRoutes);
   logger.info("Configuring image routes");
   app.use("/v1/user/self/pic", imageRoutes);
   return app;
