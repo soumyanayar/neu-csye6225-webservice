@@ -10,6 +10,7 @@ const {
   AWS_BUCKET_NAME,
   DYNAMO_DB_TABLE_NAME,
   SNS_TOPIC_ARN,
+  AWS_REGION,
 } = process.env;
 module.exports = {
   PORT,
@@ -24,5 +25,6 @@ module.exports = {
     AWS_BUCKET_NAME,
     DYNAMO_DB_TABLE_NAME,
     SNS_TOPIC_ARN,
+    AWS_REGION,
   },
 };
