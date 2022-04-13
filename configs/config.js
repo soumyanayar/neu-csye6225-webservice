@@ -8,6 +8,9 @@ const {
   DB_PASSWORD,
   DB_NAME,
   AWS_BUCKET_NAME,
+  DYNAMO_DB_TABLE_NAME,
+  SNS_TOPIC_ARN,
+  AWS_REGION,
 } = process.env;
 module.exports = {
   PORT,
@@ -20,5 +23,8 @@ module.exports = {
   },
   AWS_CONFIG: {
     AWS_BUCKET_NAME,
+    DYNAMO_DB_TABLE_NAME,
+    SNS_TOPIC_ARN,
+    AWS_REGION,
   },
 };
