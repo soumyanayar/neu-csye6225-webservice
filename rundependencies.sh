@@ -20,6 +20,10 @@ sudo yum install unzip -y
 unzip /home/ec2-user/webservice.zip -d /home/ec2-user/webservice
 sudo rm -rf /home/ec2-user/webservice.zip
 
+# Install the node server
+cd /home/ec2-user/webservice
+sudo npm install
+
 echo "Installing AWS CodeDeploy Agent"
 sudo yum update
 sudo yum install ruby -y
