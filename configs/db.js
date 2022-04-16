@@ -1,6 +1,8 @@
 const dbConfig = require("./config").MYSQL_CONFIG;
-
+const fs = require("fs");
 const Sequelize = require("sequelize");
+
+const ca_file = fs.readFileSync("/home/ec2-user/global-bundle.pem");
 
 const sequelize = new Sequelize(
   dbConfig.DB_NAME,
@@ -9,21 +11,27 @@ const sequelize = new Sequelize(
   {
     host: dbConfig.DB_HOST,
     dialect: "mysql",
-    operatorsAliases: 0,
-
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000,
-    },
-    define: {
-      scopes: {
-        excludeCreatedAtUpdateAt: {
-          attributes: { exclude: ["createdAt", "updatedAt"] },
-        },
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: true,
+        ca: ca_file,
       },
-      timestamps: false,
+      operatorsAliases: 0,
+
+      pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+      },
+      define: {
+        scopes: {
+          excludeCreatedAtUpdateAt: {
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
+        },
+        timestamps: false,
+      },
     },
   }
 );
