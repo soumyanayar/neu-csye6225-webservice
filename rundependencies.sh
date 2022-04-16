@@ -5,6 +5,18 @@ sudo yum update
 echo "Installing MySQL Client"
 sudo yum install -y mysql
 
+echo "Downloading certificate bundle for MySQL"
+cd /home/ec2-user
+wget https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
+echo "confirm if the file global-bundle.pem is downloaded"
+ls global-bundle.pem
+if [ $? -eq 0 ]; then
+    echo "global-bundle.pem file downloaded successfully"
+else
+    echo "global-bundle.pem file not downloaded"
+    exit 1
+fi
+
 echo "Installing nodejs"
 sudo yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
