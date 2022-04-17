@@ -9,6 +9,7 @@ source "amazon-ebs" "ec2" {
     device_name           = "/dev/xvda"
     volume_size           = 8
     volume_type           = "gp2"
+    encrypted             = true
   }
   ssh_username                = "ec2-user"
   ami_users                   = ["906347585273"]
