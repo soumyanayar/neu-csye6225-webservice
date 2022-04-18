@@ -101,3 +101,6 @@ This assignment solution includes the followings technology and commands:
 ## Assignment 7
 1. Installing the Code Deploying Agent in AMI packer file
 2. A S3 bucket is created in AWS console and has the policy to store the artifacts generated.
+
+## Assignment 10
+1. AWS CLI for importing the certificate ` aws acm import-certificate --certificate fileb://soumyanayar_me.crt --certificate-chain fileb://soumyanayar_me.ca-bundle --private-key fileb://private.key --region us-west-2`
