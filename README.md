@@ -100,4 +100,4 @@ This assignment solution includes the followings technology and commands:
 
 ## Assignment 7
 1. Installing the Code Deploying Agent in AMI packer file
-2. A S3 bucket is created in AWS console and has the policy to store the artifacts generated
+2. A S3 bucket is created in AWS console and has the policy to store the artifacts generated.
